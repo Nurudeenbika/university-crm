@@ -19,10 +19,10 @@ export const authService = {
 
     console.log("RESPONSE BUG:", response);
 
-    if (response && response.data.access_token) {
-      localStorage.setItem("token", response.data.access_token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      return { user: response.data.user, token: response.data.access_token };
+    if (response && response.access_token) {
+      localStorage.setItem("token", response.access_token);
+      localStorage.setItem("user", JSON.stringify(response.user));
+      return { user: response.user, token: response.access_token };
     }
 
     throw new Error(response.error || "Login failed");
