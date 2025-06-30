@@ -8,7 +8,7 @@ class WebSocketService {
   connect(token: string) {
     if (this.socket?.connected) return;
 
-    this.socket = io(import.meta.env.VITE_WS_URL || "http://localhost:8000", {
+    this.socket = io(import.meta.env.VITE_WS_URL || "http://localhost:3000", {
       auth: { token },
       transports: ["websocket"],
     });

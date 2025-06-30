@@ -133,7 +133,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
             )}
           </div>
 
-          <div>
+          {/* <div>
             <label
               htmlFor="role"
               className="block text-sm font-medium text-gray-700 mb-2"
@@ -179,6 +179,31 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
                 </div>
               </label>
             </div>
+            {errors.role && (
+              <p className="mt-1 text-sm text-red-600">{errors.role.message}</p>
+            )}
+          </div> */}
+          <div>
+            <label
+              htmlFor="role"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Role
+            </label>
+            <select
+              id="role"
+              {...register("role")}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              defaultValue="" // Optional: Forces the first option to be a placeholder
+            >
+              <option value="" disabled>
+                Select a role
+              </option>
+              <option value="student">Student</option>
+              <option value="lecturer">Lecturer</option>
+              <option value="admin">Administrator</option>
+            </select>
+
             {errors.role && (
               <p className="mt-1 text-sm text-red-600">{errors.role.message}</p>
             )}

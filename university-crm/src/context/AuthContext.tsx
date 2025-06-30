@@ -87,8 +87,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const login = async (credentials: LoginRequest) => {
     try {
-      dispatch({ type: "AUTH_START" });
+      console.log("DTA COMIGN INTO THE AUTH GUARD: ", credentials);
+      // dispatch({ type: "AUTH_START" });
       const { user, token } = await authService.login(credentials);
+
+      console.log("USER DETAILS:", user, token);
+
       dispatch({ type: "AUTH_SUCCESS", payload: { user, token } });
       wsService.connect(token);
       toast.success("Login successful!");

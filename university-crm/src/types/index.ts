@@ -1,7 +1,8 @@
 export interface User {
   id: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  name: string;
   role: "student" | "lecturer" | "admin";
   createdAt: string;
 }
@@ -16,6 +17,7 @@ export interface Course {
   syllabus?: string;
   status: "DRAFT" | "ACTIVE" | "ARCHIVED";
   enrollmentCount?: number;
+  enrolledStudents?: number;
   createdAt: string;
   updatedAt: string;
 }

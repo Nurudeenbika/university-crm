@@ -13,15 +13,16 @@ export const authService = {
   async login(
     credentials: LoginRequest
   ): Promise<{ user: User; token: string }> {
-    const response = await api.post<ApiResponse<{ user: User; token: string }>>(
-      "/auth/login",
-      credentials
-    );
+    const response = await api.post<
+      ApiResponse<{ user: User; access_token: string }>
+    >("/auth/login", credentials);
 
-    if (response.success) {
-      localStorage.setItem("token", response.data.token);
+    console.log("RESPONSE BUG:", response);
+
+    if (response && response.data.access_token) {
+      localStorage.setItem("token", response.data.access_token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      return response.data;
+      return { user: response.data.user, token: response.data.access_token };
     }
 
     throw new Error(response.error || "Login failed");

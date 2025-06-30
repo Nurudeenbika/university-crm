@@ -33,7 +33,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      await login(data);
+      console.log("LOGIN DATA", data);
+      const res = await login(data);
+
+      console.log("RESPONSE FROM LOGIN:", res);
+      // navigate("/profile");
     } catch (error) {
       // Error is handled in the context
     }
@@ -113,18 +117,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
             {isLoading ? <LoadingSpinner size="sm" text="" /> : "Sign In"}
           </button>
         </form>
-
-        {/* <div className="mt-6 text-center">
-          <p className="text-gray-600">
-            Don't have an account?{" "}
-            <button
-              onClick={onSwitchToRegister}
-              className="text-primary-600 hover:text-primary-700 font-medium"
-            >
-              Sign up
-            </button>
-          </p>
-        </div> */}
       </div>
     </div>
   );

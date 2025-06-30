@@ -6,7 +6,7 @@ import { LoadingSpinner } from "../components/common/LoadingSpinner";
 import { CourseList } from "../components/courses/CourseList";
 import { AssignmentList } from "../components/assignments/AssignmentList";
 import { api } from "../services/api";
-import { Course, Assignment, User } from "../types";
+import { Course, Assignment } from "../types";
 
 const DashboardPage: React.FC = () => {
   const { user } = useAuth();
@@ -38,14 +38,14 @@ const DashboardPage: React.FC = () => {
             api.get("/assignments/to-grade"),
           ]);
           setCourses((coursesResponse as { data: Course[] }).data);
-          setAssignments(assignmentsResponse.data);
+          setAssignments((assignmentsResponse as { data: Assignment[] }).data);
         } else if (user?.role === "admin") {
           const [coursesResponse, statsResponse] = await Promise.all([
             api.get("/courses"),
             api.get("/admin/stats"),
           ]);
-          setCourses(coursesResponse.data);
-          setStats(statsResponse.data);
+          setCourses((coursesResponse as { data: Course[] }).data);
+          setStats((statsResponse as { data: typeof stats }).data);
         }
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
@@ -192,7 +192,7 @@ const DashboardPage: React.FC = () => {
       <div className="max-w-7xl mx-auto py-6 px-4">
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-gray-900">
-            Welcome back, {user?.name || user?.email}!
+            Welcome back, {user?.firstName || user?.email}!
           </h1>
           <p className="text-gray-600 mt-2">
             {user?.role === "student" &&
